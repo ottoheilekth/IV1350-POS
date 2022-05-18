@@ -66,6 +66,17 @@ public class ControllerTest {
             fail("An InvalidItemIdentifierException should have been thrown");
         } catch (Exception e) {}
     }
+
+    @Test
+    public void testEnterItemHardcodedDBFailure() {
+        int itemIdentifier = 5;
+        int itemQuantity = 1;
+
+        try {
+            testContr.enterItem(itemIdentifier, itemQuantity);
+            fail("A DatabaseFailureException should have been thrown");
+        } catch (Exception e) {}
+    }
     
     @Test
     public void testEndSale() throws Exception {
