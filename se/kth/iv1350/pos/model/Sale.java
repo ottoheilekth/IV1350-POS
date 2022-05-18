@@ -39,8 +39,9 @@ public class Sale {
      * the quantity is increased.
      * @param itemDTO A DTO containing information about the type of item added to the sale.
      * @param quantity Number of said items added to the sale.
+     * @return The running total of the current sale.
      */
-    public void addItem(ItemDTO itemDTO, int quantity) {
+    public float addItem(ItemDTO itemDTO, int quantity) {
         Item currItem = new Item(itemDTO, quantity);
         int indexOfCurrItem = items.indexOf(currItem);
 
@@ -53,10 +54,7 @@ public class Sale {
             items.add(currItem);
 
         runningTotal += itemDTO.getPrice() * quantity * (1 + (itemDTO.getRateOfVat() / 100f));
-
-        displayItemDescription(itemDTO);
-        displayItemPrice(itemDTO);
-        displayRunningTotal();
+        return runningTotal;
     }
 
     /**

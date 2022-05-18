@@ -19,6 +19,8 @@ public class ExternalInventorySystem {
         int maxItemIdentifier = 5; // Needs to be adjusted to work with the real system.
         if(itemIdentifier < 0 || itemIdentifier > maxItemIdentifier)
             throw new InvalidItemIdentifierException("The entered item identifier is invalid");
+        
+        
 
         // A placeholder for a call to the external inventory system.
         return new ItemDTO("item" + Integer.toString(itemIdentifier), "this is a description", 

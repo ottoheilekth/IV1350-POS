@@ -42,15 +42,18 @@ public class Controller {
     }
 
     /**
-     * Retrieves an <code>itemDTO</code> from the <code>ExternalInventorySystem</code> and adds it
+     * Retrieves an <code>ItemDTO</code> from the <code>ExternalInventorySystem</code> and adds it
      * to the sale.
      * @param itemIdentifier A unique number identifying a unique type of item.
      * @param itemQuantity Number of said items added to the sale.
+     * @return A string containing the items description and price as well as the running total.
      * @throws InvalidItemIdentifierException
      */
-    public void enterItem(int itemIdentifier, int itemQuantity) throws InvalidItemIdentifierException {
+    public String enterItem(int itemIdentifier, int itemQuantity) throws InvalidItemIdentifierException {
         ItemDTO itemDTO = extInvSys.getItemDTO(itemIdentifier);
-        sale.addItem(itemDTO, itemQuantity);
+        float runningTotal = sale.addItem(itemDTO, itemQuantity);
+        return "Item description: " + itemDTO.getDescription() + "\nPrice: " + itemDTO.getPrice() + 
+        "\nRunning total: " + runningTotal;
     }
 
     /**
