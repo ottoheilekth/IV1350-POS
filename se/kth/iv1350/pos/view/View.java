@@ -30,8 +30,13 @@ public class View {
             out.println("1 item0 has been entered to the system.");
             out.println(contr.enterItem(0, 1));
             out.println();
+
             out.println("2 item1 has been entered to the system.");
             out.println(contr.enterItem(1, 2));
+            out.println();
+
+            out.println("1 item5 has been entered to the system.");
+            out.println(contr.enterItem(5, 1));
         }
         catch(Exception e) {
             out.println(e.getMessage() + ".");

@@ -57,7 +57,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void testEnterItemInvalidIdentifier () {
+    public void testEnterItemInvalidIdentifier() {
         int itemIdentifier = -1;
         int itemQuantity = 1;
 

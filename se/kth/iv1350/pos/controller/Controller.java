@@ -1,5 +1,7 @@
 package se.kth.iv1350.pos.controller;
 
+import static java.lang.System.out;
+import se.kth.iv1350.pos.integration.DatabaseFailureException;
 import se.kth.iv1350.pos.integration.DiscountDBHandler;
 import se.kth.iv1350.pos.integration.ExternalAccountingSystem;
 import se.kth.iv1350.pos.integration.ExternalInventorySystem;
@@ -47,11 +49,23 @@ public class Controller {
      * @param itemIdentifier A unique number identifying a unique type of item.
      * @param itemQuantity Number of said items added to the sale.
      * @return A string containing the items description and price as well as the running total.
-     * @throws InvalidItemIdentifierException
+     * @throws InvalidItemIdentifierException when an entered item identifier is invalid.
      */
-    public String enterItem(int itemIdentifier, int itemQuantity) throws InvalidItemIdentifierException {
-        ItemDTO itemDTO = extInvSys.getItemDTO(itemIdentifier);
-        float runningTotal = sale.addItem(itemDTO, itemQuantity);
+    public String enterItem(int itemIdentifier, int itemQuantity) throws InvalidItemIdentifierException,
+                                                                                DatabaseFailureException {
+        float runningTotal;
+        ItemDTO itemDTO = null;
+        try {
+            itemDTO = extInvSys.getItemDTO(itemIdentifier);
+        }
+        catch (DatabaseFailureException e) {
+            out.println("\nLOG FOR DEVS:");
+            e.printStackTrace();
+            out.println();
+            throw e;
+        }
+
+        runningTotal = sale.addItem(itemDTO, itemQuantity);
         return "Item description: " + itemDTO.getDescription() + "\nPrice: " + itemDTO.getPrice() + 
         "\nRunning total: " + runningTotal;
     }

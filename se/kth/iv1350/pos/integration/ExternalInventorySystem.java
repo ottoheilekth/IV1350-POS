@@ -13,14 +13,18 @@ public class ExternalInventorySystem {
      * inventory system.
      * @param itemIdentifier A unique number identifying a unique type of item.
      * @return An <code>ItemDTO</code> for the type of item with given identifier.
-     * @throws InvalidItemIdentifierException
+     * @throws DatabaseFailureException when the database cannot be reached.
+     * @throws InvalidItemIdentifierException when an entered item identifier is invalid.
      */
-    public ItemDTO getItemDTO(int itemIdentifier) throws InvalidItemIdentifierException {
+    public ItemDTO getItemDTO(int itemIdentifier) throws InvalidItemIdentifierException, 
+                                                                DatabaseFailureException {
         int maxItemIdentifier = 5; // Needs to be adjusted to work with the real system.
-        if(itemIdentifier < 0 || itemIdentifier > maxItemIdentifier)
+        if (itemIdentifier < 0 || itemIdentifier > maxItemIdentifier)
             throw new InvalidItemIdentifierException("The entered item identifier is invalid");
         
-        
+        if (itemIdentifier == 5)
+            throw new DatabaseFailureException("The database of the external inventory system could not be " + 
+                                                "reached");
 
         // A placeholder for a call to the external inventory system.
         return new ItemDTO("item" + Integer.toString(itemIdentifier), "this is a description", 
