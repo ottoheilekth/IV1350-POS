@@ -6,7 +6,6 @@ import se.kth.iv1350.pos.model.dto.ItemDTO;
 import se.kth.iv1350.pos.model.dto.SaleDTO;
 import se.kth.iv1350.pos.integration.DiscountDBHandler;
 import se.kth.iv1350.pos.integration.ReceiptPrinter;
-import static java.lang.System.out;
 
 /**
  * One single sale made by one single customer and payed with one payment.
@@ -55,29 +54,6 @@ public class Sale {
 
         runningTotal += itemDTO.getPrice() * quantity * (1 + (itemDTO.getRateOfVat() / 100f));
         return runningTotal;
-    }
-
-    /**
-     * Placeholder for an UI implementation of displaying an item's description.
-     * @param itemDTO A DTO containing the item's description.
-     */
-    private void displayItemDescription(ItemDTO itemDTO) {
-        out.println("Item description: " + itemDTO.getDescription());
-    }
-
-    /**
-     * Placeholder for an UI implementation of displaying an item's price.
-     * @param itemDTO A DTO containing the item's price.
-     */
-    private void displayItemPrice(ItemDTO itemDTO) {
-        out.println("Price: " + itemDTO.getPrice());
-    }
-
-    /**
-     * Placeholder for an UI implementation of displaying the running total (including VAT).
-     */
-    private void displayRunningTotal() {
-        out.println("Running total: " + runningTotal);
     }
 
     /**
