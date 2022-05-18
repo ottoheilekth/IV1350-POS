@@ -9,7 +9,9 @@ import se.kth.iv1350.pos.integration.InvalidItemIdentifierException;
 import se.kth.iv1350.pos.integration.InsufficientPaymentException;
 import se.kth.iv1350.pos.integration.ReceiptPrinter;
 import se.kth.iv1350.pos.integration.Register;
+import se.kth.iv1350.pos.integration.TotalRevenueFileOutput;
 import se.kth.iv1350.pos.model.dto.ItemDTO;
+import se.kth.iv1350.pos.view.TotalRevenueView;
 import se.kth.iv1350.pos.model.Sale;
 
 /**
@@ -41,6 +43,8 @@ public class Controller {
      */
     public void startSale() {
         sale = new Sale();
+        sale.addTotalRevenueObserver(new TotalRevenueView());
+        sale.addTotalRevenueObserver(new TotalRevenueFileOutput());
     }
 
     /**
@@ -96,10 +100,10 @@ public class Controller {
     public float enterCashPayment(float amountPaid) throws InsufficientPaymentException {
         float change;
 
-        this.amountPaid += amountPaid;
-        change = this.amountPaid - sale.getSaleDTO().getTotalPrice();
+        change = amountPaid - sale.getSaleDTO().getTotalPrice();
         if (change < 0)
             throw new InsufficientPaymentException("The supplied payment was not enough to cover the entire sale");
+        this.amountPaid += amountPaid;
 
         extAccSys.updateAccountingSystem(amountPaid, change);
         extInvSys.updateInventorySystem(sale.getSaleDTO());
