@@ -6,6 +6,20 @@ import se.kth.iv1350.pos.model.dto.SaleDTO;
  * This is used as a middle man for communication between the program and an already existing discount database.
  */
 public class DiscountDBHandler {
+    private static final DiscountDBHandler HANDLER_INSTANCE = new DiscountDBHandler();
+
+    /**
+     * A private constructor to prevent the creation of more instances of this class.
+     */
+    private DiscountDBHandler() {}
+
+    /**
+     * @return The sole instance of this singleton.
+     */
+    public static DiscountDBHandler getHandler() {
+        return HANDLER_INSTANCE;
+    }
+
     /**
      * Checks the discount database for discount eligibility. Currently does not apply any discounts.
      * @param customerID The customer's ID.

@@ -74,14 +74,13 @@ public class SaleTest {
 
     @Test
     void testCheckForDiscount() {
-        DiscountDBHandler testDiscountDBHandler = new DiscountDBHandler();
         ItemDTO testItemDTO = new ItemDTO("testItem", "used only for testing", 5, 12);
         float expResult = 5.6f;
 
         testSale.addItem(testItemDTO, 1);
         testSale.createSaleDTO();
 
-        assertEquals(expResult, testSale.checkForDiscount(0, testDiscountDBHandler), 
+        assertEquals(expResult, testSale.checkForDiscount(0, DiscountDBHandler.getHandler()), 
                     "The discounted price did not match the expected discounted price");
     }
 }

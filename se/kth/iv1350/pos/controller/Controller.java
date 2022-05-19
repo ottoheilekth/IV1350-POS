@@ -23,7 +23,6 @@ import se.kth.iv1350.pos.model.TotalRevenueObserver;
 public class Controller {
     private ExternalAccountingSystem extAccSys;
     private ExternalInventorySystem extInvSys;
-    private DiscountDBHandler discountDBHandler;
     private Register register;
     private ReceiptPrinter receiptPrinter;
     private Sale sale;
@@ -36,7 +35,6 @@ public class Controller {
     public Controller() {
         extAccSys = new ExternalAccountingSystem();
         extInvSys = new ExternalInventorySystem();
-        discountDBHandler = new DiscountDBHandler();
         register = new Register();
         receiptPrinter = new ReceiptPrinter();
         amountPaid = 0;
@@ -95,7 +93,7 @@ public class Controller {
      * @return New total price. Same if no discount was applied.
      */
     public float discountRequest(int customerID) {
-        return sale.checkForDiscount(customerID, discountDBHandler);
+        return sale.checkForDiscount(customerID, DiscountDBHandler.getHandler());
     }
 
     /**

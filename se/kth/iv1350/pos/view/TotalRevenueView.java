@@ -16,6 +16,6 @@ public class TotalRevenueView implements TotalRevenueObserver{
     }
 
     private void displayTotalRevenue() {
-        System.out.println("Total revenue since program start: " + totalRevenue + " KR");
+        System.out.println("Total revenue since program start: " + totalRevenue + " KR\n");
     }
 }
