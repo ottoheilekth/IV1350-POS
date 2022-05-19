@@ -71,7 +71,8 @@ public class Controller {
             out.println("\nLOG FOR DEVS:");
             e.printStackTrace();
             out.println();
-            throw e;
+            throw new DatabaseFailureException("The database of the external inventory system could not be " + 
+            "reached");
         }
 
         runningTotal = sale.addItem(itemDTO, itemQuantity);

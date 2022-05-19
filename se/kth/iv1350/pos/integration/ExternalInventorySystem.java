@@ -23,8 +23,7 @@ public class ExternalInventorySystem {
             throw new InvalidItemIdentifierException("The entered item identifier is invalid");
         
         if (itemIdentifier == 5)
-            throw new DatabaseFailureException("The database of the external inventory system could not be " + 
-                                                "reached");
+            throw new DatabaseFailureException("The database server is not running due to an error");
 
         // A placeholder for a call to the external inventory system.
         return new ItemDTO("item" + Integer.toString(itemIdentifier), "this is a description", 
