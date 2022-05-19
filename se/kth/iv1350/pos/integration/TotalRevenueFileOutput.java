@@ -7,13 +7,19 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-
 import se.kth.iv1350.pos.model.TotalRevenueObserver;
 
+/**
+ * This class observes the <code>Sale</code> class and creates a log containing the total revenue earned
+ * since the program start.
+ */
 public class TotalRevenueFileOutput implements TotalRevenueObserver {
     private float totalRevenue;
     private PrintWriter totalRevenueLogger;
 
+    /**
+     * Creates a new instance and a log file for the current execution of the program.
+     */
     public TotalRevenueFileOutput() {
         totalRevenue = 0;
 
@@ -29,6 +35,9 @@ public class TotalRevenueFileOutput implements TotalRevenueObserver {
         }
     }
 
+    /**
+     * Updates the log with the total revenue earned so far.
+     */
     public void UpdateTotalRevenue(float saleTotal) {
         totalRevenue += saleTotal;
         totalRevenueLogger.println("[" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) +
