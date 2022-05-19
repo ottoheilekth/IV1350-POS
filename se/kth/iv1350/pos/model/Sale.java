@@ -3,7 +3,6 @@ package se.kth.iv1350.pos.model;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import se.kth.iv1350.pos.model.dto.ItemDTO;
 import se.kth.iv1350.pos.model.dto.SaleDTO;
 import se.kth.iv1350.pos.integration.DiscountDBHandler;
@@ -18,7 +17,7 @@ public class Sale {
     private ArrayList<Item> items;
     private SaleDTO saleDTO;
     private float runningTotal;
-    private List<TotalRevenueObserver> totalRevenueObservers = new ArrayList<>();
+    private List<TotalRevenueObserver> totalRevenueObservers;
 
     /**
      * Creates a new instance and saves the time of the sale.
@@ -27,6 +26,7 @@ public class Sale {
         saleTime = LocalTime.now();
         receipt = new Receipt();
         items = new ArrayList<Item>();
+        totalRevenueObservers = new ArrayList<>();
     }
 
     /**

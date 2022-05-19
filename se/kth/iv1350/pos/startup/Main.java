@@ -13,6 +13,8 @@ public class Main {
     */
     public static void main(String[] args) {
         Controller contr = new Controller();
-        new View(contr).runFakeExecution();
+        View view = new View(contr);
+        view.runFakeExecution();
+        view.runFakeExecution();
     }
 }

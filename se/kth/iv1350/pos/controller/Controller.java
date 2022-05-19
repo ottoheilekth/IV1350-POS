@@ -1,6 +1,8 @@
 package se.kth.iv1350.pos.controller;
 
 import static java.lang.System.out;
+import java.util.ArrayList;
+import java.util.List;
 import se.kth.iv1350.pos.integration.DatabaseFailureException;
 import se.kth.iv1350.pos.integration.DiscountDBHandler;
 import se.kth.iv1350.pos.integration.ExternalAccountingSystem;
@@ -13,6 +15,7 @@ import se.kth.iv1350.pos.integration.TotalRevenueFileOutput;
 import se.kth.iv1350.pos.model.dto.ItemDTO;
 import se.kth.iv1350.pos.view.TotalRevenueView;
 import se.kth.iv1350.pos.model.Sale;
+import se.kth.iv1350.pos.model.TotalRevenueObserver;
 
 /**
  * This is the application's only controller. All calls to the model pass through this class.
@@ -25,6 +28,7 @@ public class Controller {
     private ReceiptPrinter receiptPrinter;
     private Sale sale;
     private float amountPaid;
+    private List<TotalRevenueObserver> totalRevenueObservers;
 
     /**
      * Creates a new instance.
@@ -36,6 +40,9 @@ public class Controller {
         register = new Register();
         receiptPrinter = new ReceiptPrinter();
         amountPaid = 0;
+        totalRevenueObservers = new ArrayList<>();
+        totalRevenueObservers.add(new TotalRevenueView());
+        totalRevenueObservers.add(new TotalRevenueFileOutput());
     }
     
     /**
@@ -43,8 +50,8 @@ public class Controller {
      */
     public void startSale() {
         sale = new Sale();
-        sale.addTotalRevenueObserver(new TotalRevenueView());
-        sale.addTotalRevenueObserver(new TotalRevenueFileOutput());
+        for (TotalRevenueObserver obs : totalRevenueObservers)
+            sale.addTotalRevenueObserver(obs);
     }
 
     /**

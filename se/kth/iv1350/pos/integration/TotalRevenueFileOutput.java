@@ -18,12 +18,13 @@ public class TotalRevenueFileOutput implements TotalRevenueObserver {
         totalRevenue = 0;
 
         try {
-            File file = new File("./logs/total_revenue_logs/total_revenue_log_" + LocalDate.now() + ".txt");
+            File file = new File("./logs/total_revenue_logs/" + LocalDate.now() + '_' +
+                                LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) + ".txt");
             file.getParentFile().mkdirs();
-            totalRevenueLogger = new PrintWriter(new FileWriter(file), true);
+            totalRevenueLogger = new PrintWriter(new FileWriter(file, true), true);
         }
         catch (IOException e) {
-            System.out.println("Logging the total revenue is not possible due to an error");
+            System.out.println("Logging the total revenue for this session is not possible due to an error");
             e.printStackTrace();
         }
     }
