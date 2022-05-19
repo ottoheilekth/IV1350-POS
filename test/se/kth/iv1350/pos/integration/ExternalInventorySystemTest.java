@@ -5,7 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import se.kth.iv1350.pos.integration.DatabaseFailureException;
 import se.kth.iv1350.pos.integration.ExternalInventorySystem;
+import se.kth.iv1350.pos.integration.InvalidItemIdentifierException;
 
 public class ExternalInventorySystemTest {
     private ExternalInventorySystem testExtInvSys;
@@ -44,5 +46,19 @@ public class ExternalInventorySystemTest {
             testExtInvSys.getItemDTO(-1);
             fail("An InvalidItemIdentifierException should have been thrown");
         } catch (Exception e) {}
+    }
+
+    @Test
+    void testGetItemDTOIdentifier5() throws DatabaseFailureException {
+        try {
+            testExtInvSys.getItemDTO(5);
+            fail("A DatabaseFailureException should have been thrown");
+        }
+        catch (DatabaseFailureException e) {
+            assertTrue(e.getMessage().contains("server"), "Wrong exception message, does not contain 'server'");
+        } 
+        catch(InvalidItemIdentifierException e) {
+            fail("The wrong exception was thrown");
+        }
     }
 }
