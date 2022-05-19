@@ -24,13 +24,15 @@ public class Receipt {
         for (Item item : saleDTO.getItems()) {
             stringBuilder.append(item.getItemDTO().getName() + '\n');
             stringBuilder.append("\t" + item.getQuantity() + " x " + item.getItemDTO().getPrice() + 
-            "\t\t\t" + item.getItemDTO().getPrice() * item.getQuantity() + '\n');
+                                "\t\t\t" + item.getItemDTO().getPrice() * item.getQuantity() + '\n');
         }
 
-        stringBuilder.append("\nTotal with discount (SEK):\t" + saleDTO.getTotalPrice() + '\n');
-        stringBuilder.append("Total VAT: " + sumOfVAT() + '\n');
-        stringBuilder.append("Amount paid: " + amountPaid + '\n');
-        stringBuilder.append("Change: " + change + '\n');
+        stringBuilder.append("\nDiscount:\t\t\t" + Math.round(100 - saleDTO.getDiscountMultiplier() * 100) + 
+                            "%\n");
+        stringBuilder.append("Total (SEK):\t\t\t" + saleDTO.getTotalPrice() + '\n');
+        stringBuilder.append("VAT (SEK):\t\t\t" + sumOfVAT() + '\n');
+        stringBuilder.append("Amount paid (SEK):\t\t" + amountPaid + '\n');
+        stringBuilder.append("Change (SEK):\t\t\t" + change + '\n');
         stringBuilder.append("------------End of receipt-------------");
 
         return stringBuilder.toString();
@@ -44,7 +46,7 @@ public class Receipt {
         float totalVAT = 0;
         for (Item item : saleDTO.getItems())
             totalVAT += item.getItemDTO().getPrice() * item.getQuantity() * item.getItemDTO().getRateOfVat() / 100f;
-        return totalVAT;
+        return Math.round((totalVAT * saleDTO.getDiscountMultiplier() * 100)) / 100f;
     }
 
     /**

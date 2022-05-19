@@ -9,6 +9,7 @@ import se.kth.iv1350.pos.model.Item;
 public class SaleDTO {
     private ArrayList<Item> items;
     private float totalPrice;
+    private float discountMultiplier;
 
     /**
      * Private default constructor to prevent accidental creation of an empty instance.
@@ -40,10 +41,18 @@ public class SaleDTO {
     }
 
     /**
-     * Updates the total price with a given new total.
+     * @return Multiplier for discount.
+     */
+    public float getDiscountMultiplier() {
+        return discountMultiplier;
+    }
+
+    /**
+     * Updates the total price with a given new total and sets the discount multiplier.
      * @param newTotal New total price.
      */
     public void updateTotalPrice(float newTotal) {
+        discountMultiplier = (float) (newTotal / totalPrice);
         totalPrice = newTotal;
     }
 }

@@ -104,7 +104,7 @@ public class Sale {
      */
     private void notifyObservers() {
         for (TotalRevenueObserver obs : totalRevenueObservers)
-            obs.UpdateTotalRevenue(runningTotal);
+            obs.UpdateTotalRevenue(saleDTO.getTotalPrice());
     }
 
     /**
