@@ -73,7 +73,7 @@ public class Sale {
      * Checks the discount database if a discount is applicable.
      * @param customerID The customer's ID.
      * @param discountDBHandler The handler of the discount database.
-     * @return
+     * @return A new total price, the same if no discount was applied.
      */
     public float checkForDiscount(int customerID, DiscountDBHandler discountDBHandler) {
         float newTotalPrice = (float) Math.round(discountDBHandler.checkForDiscount(customerID, saleDTO) * 100) / 100;
