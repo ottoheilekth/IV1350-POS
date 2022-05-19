@@ -1,4 +1,2 @@
 # Untracked folders:
-/logs
-
-!.gitignore
+logs/
