@@ -99,11 +99,18 @@ public class Sale {
         notifyObservers();
     }
 
+    /**
+     * Notifies all stored observers.
+     */
     private void notifyObservers() {
         for (TotalRevenueObserver obs : totalRevenueObservers)
             obs.UpdateTotalRevenue(runningTotal);
     }
 
+    /**
+     * Adds an observer to the stored list of observers.
+     * @param obs The observer to add.
+     */
     public void addTotalRevenueObserver(TotalRevenueObserver obs) {
         totalRevenueObservers.add(obs);
     }

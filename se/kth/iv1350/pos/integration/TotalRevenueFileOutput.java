@@ -36,8 +36,10 @@ public class TotalRevenueFileOutput implements TotalRevenueObserver {
     }
 
     /**
-     * Updates the log with the total revenue earned so far.
+     * Updates and logs the total revenue earned so far.
+     * @param saleTotal The total of the last ended sale.
      */
+    @Override
     public void UpdateTotalRevenue(float saleTotal) {
         totalRevenue += saleTotal;
         totalRevenueLogger.println("[" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) +
