@@ -21,7 +21,7 @@ public class DiscountDBHandler {
     }
 
     /**
-     * Checks the discount database for discount eligibility. Currently does not apply any discounts.
+     * Checks the discount database for discount eligibility.
      * @param customerID The customer's ID.
      * @param saleDTO The DTO of the finished <code>Sale</code>.
      * @return New total price. Same if no discount was applied.
