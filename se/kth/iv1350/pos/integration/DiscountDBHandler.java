@@ -27,7 +27,12 @@ public class DiscountDBHandler {
      * @return New total price. Same if no discount was applied.
      */
     public float checkForDiscount(int customerID, SaleDTO saleDTO) {
-        // A call checking the actual discount database for discount eligibility is made here.
-        return saleDTO.getTotalPrice();
+        float newPrice = saleDTO.getTotalPrice();
+
+        // A call checking the actual discount database for discount eligibility should replace these.
+        newPrice *= new DiscountCalculatorCustomerAge().CalculateDiscount(customerID, saleDTO);
+        newPrice *= new DiscountCalculatorSalePrice().CalculateDiscount(customerID, saleDTO);
+
+        return newPrice;
     }
 }
