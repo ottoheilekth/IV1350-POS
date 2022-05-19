@@ -37,15 +37,27 @@ public class ExternalInventorySystemTest {
         try {
             testExtInvSys.getItemDTO(6);
             fail("An InvalidItemIdentifierException should have been thrown");
-        } catch (Exception e) {}
+        }
+        catch (InvalidItemIdentifierException e) {
+            assertTrue(e.getMessage().contains("invalid"), "Wrong exception message, does not contain 'invalid'");
+        }
+        catch (DatabaseFailureException e) {
+            fail("The wrong exception was thrown");
+        }
     }
 
     @Test
     void testGetItemDTONegativeIdentifier() {
         try {
-            testExtInvSys.getItemDTO(-1);
+            testExtInvSys.getItemDTO(6);
             fail("An InvalidItemIdentifierException should have been thrown");
-        } catch (Exception e) {}
+        }
+        catch (InvalidItemIdentifierException e) {
+            assertTrue(e.getMessage().contains("invalid"), "Wrong exception message, does not contain 'invalid'");
+        }
+        catch (DatabaseFailureException e) {
+            fail("The wrong exception was thrown");
+        }
     }
 
     @Test
