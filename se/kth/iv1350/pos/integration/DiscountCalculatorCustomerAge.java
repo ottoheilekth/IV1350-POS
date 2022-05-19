@@ -18,7 +18,7 @@ class DiscountCalculatorCustomerAge implements DiscountCalculator {
         while (firstDigit > 10)
             firstDigit /= 10;
         
-        if (firstDigit == 1)
+        if (firstDigit == 2)
             return 0.75f;
         return 1;
     }
