@@ -57,7 +57,7 @@ public class Item {
     /**
      * Updates the quantity of the current item by a given amount.
      * @param amount Amount of which to increase the quantity by.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException When <code>amount</code> is less than or equal to zero.
      */
     public void increaseQuantity(int amount) {
         if (amount <= 0)
